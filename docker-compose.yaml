@@ -4,8 +4,7 @@ services:
     restart: always
     container_name: "mcserver"
     environment:
-      MEMORY_MIN: "1G"
-      MEMORY_MAX: "1G"
+      MEMORYSIZE: "1G"
       PAPERMC_FLAGS: ""
     volumes:
       - "/home/pi/mcserver:/data:rw"
