@@ -41,5 +41,14 @@ if ! id "$DOCKER_USER" >/dev/null 2>&1; then
     fi
 fi
 
+# Use MEMORY_MIN and MEMORY_MAX if set, otherwise fall back to MEMORYSIZE
+if [ -n "$MEMORY_MIN" ] && [ -n "$MEMORY_MAX" ]; then
+    XMS="$MEMORY_MIN"
+    XMX="$MEMORY_MAX"
+else
+    XMS="$MEMORYSIZE"
+    XMX="$MEMORYSIZE"
+fi
+
 export HOME=/home/$DOCKER_USER
-exec gosu $DOCKER_USER:$DOCKER_GROUP java -jar -Xms$MEMORY_MIN -Xmx$MEMORY_MAX $JAVAFLAGS /opt/minecraft/paperspigot.jar $PAPERMC_FLAGS nogui
+exec gosu $DOCKER_USER:$DOCKER_GROUP java -jar -Xms$XMS -Xmx$XMX $JAVAFLAGS /opt/minecraft/paperspigot.jar $PAPERMC_FLAGS nogui
