@@ -45,9 +45,12 @@ fi
 if [ -n "$MEMORY_MIN" ] && [ -n "$MEMORY_MAX" ]; then
     XMS="$MEMORY_MIN"
     XMX="$MEMORY_MAX"
-else
+elif [ -n "$MEMORYSIZE" ]; then
     XMS="$MEMORYSIZE"
     XMX="$MEMORYSIZE"
+else
+    XMS="1G"
+    XMX="1G"
 fi
 
 export HOME=/home/$DOCKER_USER
